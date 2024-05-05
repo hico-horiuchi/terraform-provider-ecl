@@ -38,3 +38,6 @@ terraform-provider-ecl
 
 # own env files
 .myenvrc
+
+# Claude Code local settings
+.claude/settings.local.json

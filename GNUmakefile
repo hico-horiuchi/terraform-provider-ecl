@@ -6,9 +6,16 @@ PKG_NAME=ecl
 default: build
 
 tools:
-	GO111MODULE=on go install github.com/client9/misspell/cmd/misspell
-	GO111MODULE=on go install github.com/golangci/golangci-lint/cmd/golangci-lint
-	GO111MODULE=on go install github.com/bflad/tfproviderlint/cmd/tfproviderlint
+	$(eval GO_VERSION := $(shell cat .go-version))
+	$(eval TEMP_DIR := $(shell mktemp -d))
+	cd $(TEMP_DIR) && \
+		asdf local golang $(GO_VERSION) && \
+		GO111MODULE=on go get github.com/client9/misspell/cmd/misspell@v0.3.4 && \
+		GO111MODULE=on go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.39.0 && \
+		GO111MODULE=on go get github.com/bflad/tfproviderlint/cmd/tfproviderlint@v0.28.1 && \
+		GO111MODULE=on go get github.com/kisielk/errcheck@v1.6.3
+	cd $(CURDIR)
+	rm -rf $(TEMP_DIR)
 
 build: fmtcheck
 	go install

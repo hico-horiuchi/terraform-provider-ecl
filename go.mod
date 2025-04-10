@@ -7,6 +7,8 @@ require (
 	gopkg.in/yaml.v2 v2.2.8
 )
 
+replace github.com/nttcom/eclcloud/v3 => github.com/hico-horiuchi/eclcloud/v3 v3.2.1-0.20250326072957-cc1768a62007
+
 require (
 	cloud.google.com/go v0.104.0 // indirect
 	cloud.google.com/go/compute v1.10.0 // indirect

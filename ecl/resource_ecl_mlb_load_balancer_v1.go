@@ -3,6 +3,8 @@ package ecl
 import (
 	"fmt"
 	"log"
+	"strconv"
+	"strings"
 	"time"
 
 	"github.com/hashicorp/terraform/helper/resource"
@@ -15,18 +17,37 @@ import (
 func reservedFixedIPsSchemaForResource() *schema.Schema {
 	return &schema.Schema{
 		Type:     schema.TypeList,
-		Required: true,
-		MinItems: 4,
+		Optional: true,
+		Computed: true,
 		MaxItems: 4,
 		Elem: &schema.Resource{
 			Schema: map[string]*schema.Schema{
 				"ip_address": &schema.Schema{
 					Type:     schema.TypeString,
-					Required: true,
+					Optional: true,
+					Computed: true,
 				},
 			},
 		},
+		DiffSuppressFunc: suppressReservedFixedIPsDiff,
 	}
+}
+
+func suppressReservedFixedIPsDiff(k, old, new string, d *schema.ResourceData) bool {
+	if strings.HasSuffix(k, ".#") {
+		oldCount, errOld := strconv.Atoi(old)
+		newCount, errNew := strconv.Atoi(new)
+
+		if errOld != nil || errNew != nil {
+			return false
+		}
+
+		if oldCount == 4 && newCount <= 3 {
+			return true
+		}
+	}
+
+	return false
 }
 
 func interfacesSchemaForResource() *schema.Schema {
@@ -142,10 +163,13 @@ func resourceMLBLoadBalancerV1Create(d *schema.ResourceData, meta interface{}) e
 
 	interfaces := make([]load_balancers.CreateOptsInterface, len(d.Get("interfaces").([]interface{})))
 	for i, interfaceV := range d.Get("interfaces").([]interface{}) {
-		reservedFixedIPs := make([]load_balancers.CreateOptsReservedFixedIP, len(interfaceV.(map[string]interface{})["reserved_fixed_ips"].([]interface{})))
-		for j, reservedFixedIP := range interfaceV.(map[string]interface{})["reserved_fixed_ips"].([]interface{}) {
-			reservedFixedIPs[j] = load_balancers.CreateOptsReservedFixedIP{
-				IPAddress: reservedFixedIP.(map[string]interface{})["ip_address"].(string),
+		reservedFixedIPs := []load_balancers.CreateOptsReservedFixedIP{}
+		if reservedFixedIPsRaw, ok := interfaceV.(map[string]interface{})["reserved_fixed_ips"].([]interface{}); ok {
+			reservedFixedIPs = make([]load_balancers.CreateOptsReservedFixedIP, len(reservedFixedIPsRaw))
+			for j, reservedFixedIP := range reservedFixedIPsRaw {
+				reservedFixedIPs[j] = load_balancers.CreateOptsReservedFixedIP{
+					IPAddress: reservedFixedIP.(map[string]interface{})["ip_address"].(string),
+				}
 			}
 		}
 
@@ -367,10 +391,14 @@ func resourceMLBLoadBalancerV1UpdateConfigurations(d *schema.ResourceData, clien
 			isConfigurationsUpdated = true
 
 			for i, interfaceV := range d.Get("interfaces").([]interface{}) {
-				results := make([]load_balancers.CreateStagedOptsReservedFixedIP, len(interfaceV.(map[string]interface{})["reserved_fixed_ips"].([]interface{})))
-				for j, reservedFixedIP := range interfaceV.(map[string]interface{})["reserved_fixed_ips"].([]interface{}) {
-					results[j] = load_balancers.CreateStagedOptsReservedFixedIP{
-						IPAddress: reservedFixedIP.(map[string]interface{})["ip_address"].(string),
+				results := []load_balancers.CreateStagedOptsReservedFixedIP{}
+				if reservedFixedIPsRaw, ok := interfaceV.(map[string]interface{})["reserved_fixed_ips"].([]interface{}); ok {
+					results = make([]load_balancers.CreateStagedOptsReservedFixedIP, len(reservedFixedIPsRaw))
+					for j, reservedFixedIP := range reservedFixedIPsRaw {
+						ipAddress := reservedFixedIP.(map[string]interface{})["ip_address"].(string)
+						results[j] = load_balancers.CreateStagedOptsReservedFixedIP{
+							IPAddress: ipAddress,
+						}
 					}
 				}
 				reservedFixedIPs[i] = results
@@ -395,7 +423,7 @@ func resourceMLBLoadBalancerV1UpdateConfigurations(d *schema.ResourceData, clien
 
 			_, err := load_balancers.CreateStaged(client, d.Id(), createStagedOpts).Extract()
 			if err != nil {
-				return fmt.Errorf("Error updating ECL managed load balancer load balancer configurations (%s) with options %+v: %s", d.Id(), createStagedOpts, err)
+				return fmt.Errorf("Error updating ECL managed load balancer load balancer configurations in Active (%s) with options %+v: %s", d.Id(), createStagedOpts, err)
 			}
 		}
 	} else {
@@ -422,11 +450,14 @@ func resourceMLBLoadBalancerV1UpdateConfigurations(d *schema.ResourceData, clien
 			isConfigurationsUpdated = true
 
 			for i, interfaceV := range d.Get("interfaces").([]interface{}) {
-				results := make([]load_balancers.UpdateStagedOptsReservedFixedIP, len(interfaceV.(map[string]interface{})["reserved_fixed_ips"].([]interface{})))
-				for j, reservedFixedIP := range interfaceV.(map[string]interface{})["reserved_fixed_ips"].([]interface{}) {
-					ipAddress := reservedFixedIP.(map[string]interface{})["ip_address"].(string)
-					results[j] = load_balancers.UpdateStagedOptsReservedFixedIP{
-						IPAddress: &ipAddress,
+				results := []load_balancers.UpdateStagedOptsReservedFixedIP{}
+				if reservedFixedIPsRaw, ok := interfaceV.(map[string]interface{})["reserved_fixed_ips"].([]interface{}); ok {
+					results = make([]load_balancers.UpdateStagedOptsReservedFixedIP, len(reservedFixedIPsRaw))
+					for j, reservedFixedIP := range reservedFixedIPsRaw {
+						ipAddress := reservedFixedIP.(map[string]interface{})["ip_address"].(string)
+						results[j] = load_balancers.UpdateStagedOptsReservedFixedIP{
+							IPAddress: &ipAddress,
+						}
 					}
 				}
 				reservedFixedIPs[i] = results
@@ -453,7 +484,7 @@ func resourceMLBLoadBalancerV1UpdateConfigurations(d *schema.ResourceData, clien
 
 			_, err := load_balancers.UpdateStaged(client, d.Id(), updateStagedOpts).Extract()
 			if err != nil {
-				return fmt.Errorf("Error updating ECL managed load balancer load balancer configurations (%s) with options %+v: %s", d.Id(), updateStagedOpts, err)
+				return fmt.Errorf("Error updating ECL managed load balancer load balancer configurations in not Active (%s) with options %+v: %s", d.Id(), updateStagedOpts, err)
 			}
 		}
 	}

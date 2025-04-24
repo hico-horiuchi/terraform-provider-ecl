@@ -235,16 +235,6 @@ func resourceMLBPolicyV1Read(d *schema.ResourceData, meta interface{}) error {
 		d.Set("default_target_group_id", policy.Staged.DefaultTargetGroupID)
 		d.Set("backup_target_group_id", policy.Staged.BackupTargetGroupID)
 		d.Set("tls_policy_id", policy.Staged.TLSPolicyID)
-		serverNameIndications := make([]map[string]interface{}, len(policy.Staged.ServerNameIndications))
-		for i, serverNameIndication := range policy.Staged.ServerNameIndications {
-			serverNameIndications[i] = map[string]interface{}{
-				"server_name":    serverNameIndication.ServerName,
-				"input_type":     serverNameIndication.InputType,
-				"priority":       serverNameIndication.Priority,
-				"certificate_id": serverNameIndication.CertificateID,
-			}
-		}
-		d.Set("server_name_indications", serverNameIndications)
 	} else if policy.ConfigurationStatus == "UPDATE_STAGED" {
 		d.Set("algorithm", ternary(policy.Staged.Algorithm == "", policy.Algorithm, policy.Staged.Algorithm))
 		d.Set("persistence", ternary(policy.Staged.Persistence == "", policy.Persistence, policy.Staged.Persistence))
@@ -258,12 +248,14 @@ func resourceMLBPolicyV1Read(d *schema.ResourceData, meta interface{}) error {
 		d.Set("default_target_group_id", ternary(policy.Staged.DefaultTargetGroupID == "", policy.DefaultTargetGroupID, policy.Staged.DefaultTargetGroupID))
 		d.Set("backup_target_group_id", ternary(policy.Staged.BackupTargetGroupID == "", policy.BackupTargetGroupID, policy.Staged.BackupTargetGroupID))
 		d.Set("tls_policy_id", ternary(policy.Staged.TLSPolicyID == "", policy.TLSPolicyID, policy.Staged.TLSPolicyID))
-		tmpServerNameIndications := policy.ServerNameIndications
-		if policy.Staged.ServerNameIndications != nil {
-			tmpServerNameIndications = policy.Staged.ServerNameIndications
-		}
-		serverNameIndications := make([]map[string]interface{}, len(tmpServerNameIndications))
-		for i, serverNameIndication := range tmpServerNameIndications {
+	} else if policy.ConfigurationStatus == "DELETE_STAGED" {
+		d.SetId("")
+		return nil
+	}
+
+	if policy.ConfigurationStatus == "ACTIVE" || (policy.ConfigurationStatus == "UPDATE_STAGED" && policy.Staged.ServerNameIndications == nil) {
+		serverNameIndications := make([]map[string]interface{}, len(policy.ServerNameIndications))
+		for i, serverNameIndication := range policy.ServerNameIndications {
 			serverNameIndications[i] = map[string]interface{}{
 				"server_name":    serverNameIndication.ServerName,
 				"input_type":     serverNameIndication.InputType,
@@ -272,9 +264,21 @@ func resourceMLBPolicyV1Read(d *schema.ResourceData, meta interface{}) error {
 			}
 		}
 		d.Set("server_name_indications", serverNameIndications)
-	} else if policy.ConfigurationStatus == "DELETE_STAGED" {
-		d.SetId("")
-		return nil
+	} else if (policy.ConfigurationStatus == "CREATE_STAGED" || policy.ConfigurationStatus == "UPDATE_STAGED") && policy.Staged.ServerNameIndications != nil {
+		serverNameIndications := make([]map[string]interface{}, len(policy.Staged.ServerNameIndications))
+		for i, serverNameIndication := range policy.Staged.ServerNameIndications {
+			serverNameIndications[i] = map[string]interface{}{
+				"server_name":    serverNameIndication.ServerName,
+				"input_type":     serverNameIndication.InputType,
+				"priority":       serverNameIndication.Priority,
+				"certificate_id": serverNameIndication.CertificateID,
+			}
+		}
+		d.Set("server_name_indications", serverNameIndications)
+	} else {
+		serverNameIndications := make([]interface{}, 0)
+
+		d.Set("server_name_indications", serverNameIndications)
 	}
 
 	d.Set("name", policy.Name)
@@ -417,6 +421,7 @@ func resourceMLBPolicyV1UpdateConfigurations(d *schema.ResourceData, client *ecl
 
 		if d.HasChange("server_name_indications") {
 			isConfigurationsUpdated = true
+
 			serverNameIndications := make([]policies.CreateStagedOptsServerNameIndication, len(d.Get("server_name_indications").([]interface{})))
 			for i, serverNameIndication := range d.Get("server_name_indications").([]interface{}) {
 				serverNameIndications[i] = policies.CreateStagedOptsServerNameIndication{
@@ -514,6 +519,7 @@ func resourceMLBPolicyV1UpdateConfigurations(d *schema.ResourceData, client *ecl
 
 		if d.HasChange("server_name_indications") {
 			isConfigurationsUpdated = true
+
 			serverNameIndications := make([]policies.UpdateStagedOptsServerNameIndication, len(d.Get("server_name_indications").([]interface{})))
 			for i, serverNameIndication := range d.Get("server_name_indications").([]interface{}) {
 				result := policies.UpdateStagedOptsServerNameIndication{}

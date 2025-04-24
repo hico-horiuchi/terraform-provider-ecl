@@ -42,7 +42,7 @@ func suppressReservedFixedIPsDiff(k, old, new string, d *schema.ResourceData) bo
 			return false
 		}
 
-		if oldCount == 4 && newCount <= 3 {
+		if oldCount == 4 && newCount < 4 {
 			return true
 		}
 	}
@@ -391,17 +391,16 @@ func resourceMLBLoadBalancerV1UpdateConfigurations(d *schema.ResourceData, clien
 			isConfigurationsUpdated = true
 
 			for i, interfaceV := range d.Get("interfaces").([]interface{}) {
-				results := []load_balancers.CreateStagedOptsReservedFixedIP{}
+				reservedFixedIPs[i] = []load_balancers.CreateStagedOptsReservedFixedIP{}
 				if reservedFixedIPsRaw, ok := interfaceV.(map[string]interface{})["reserved_fixed_ips"].([]interface{}); ok {
-					results = make([]load_balancers.CreateStagedOptsReservedFixedIP, len(reservedFixedIPsRaw))
+					results := make([]load_balancers.CreateStagedOptsReservedFixedIP, len(reservedFixedIPsRaw))
 					for j, reservedFixedIP := range reservedFixedIPsRaw {
-						ipAddress := reservedFixedIP.(map[string]interface{})["ip_address"].(string)
 						results[j] = load_balancers.CreateStagedOptsReservedFixedIP{
-							IPAddress: ipAddress,
+							IPAddress: reservedFixedIP.(map[string]interface{})["ip_address"].(string),
 						}
 					}
+					reservedFixedIPs[i] = results
 				}
-				reservedFixedIPs[i] = results
 			}
 
 			for i, interfaceV := range d.Get("interfaces").([]interface{}) {

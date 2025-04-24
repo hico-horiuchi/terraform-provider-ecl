@@ -109,6 +109,7 @@ func TestMockedAccMLBV1PolicyResource(t *testing.T) {
 					resource.TestCheckResourceAttr("ecl_mlb_policy_v1.policy", "server_name_indications.0.server_name", "example.com"),
 					resource.TestCheckResourceAttr("ecl_mlb_policy_v1.policy", "server_name_indications.0.input_type", "fixed"),
 					resource.TestCheckResourceAttr("ecl_mlb_policy_v1.policy", "server_name_indications.0.priority", "1"),
+					resource.TestCheckResourceAttr("ecl_mlb_policy_v1.policy", "server_name_indications.0.certificate_id", "07afa7bf-fbc1-4876-a2b9-eae4ca6e53f3"),
 					resource.TestCheckResourceAttr("ecl_mlb_policy_v1.policy", "certificate_id", "f57a98fe-d63e-4048-93a0-51fe163f30d7"),
 					resource.TestCheckResourceAttr("ecl_mlb_policy_v1.policy", "health_monitor_id", "dd7a96d6-4e66-4666-baca-a8555f0c472c"),
 					resource.TestCheckResourceAttr("ecl_mlb_policy_v1.policy", "listener_id", "68633f4f-f52a-402f-8572-b8173418904f"),

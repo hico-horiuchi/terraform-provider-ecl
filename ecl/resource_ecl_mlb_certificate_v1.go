@@ -41,6 +41,7 @@ func certificateKeyFileSchemaForResource() *schema.Schema {
 				"passphrase": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
+					ForceNew: true,
 				},
 			},
 		},

@@ -263,6 +263,7 @@ func resourceMLBPolicyV1Read(d *schema.ResourceData, meta interface{}) error {
 				"certificate_id": serverNameIndication.CertificateID,
 			}
 		}
+
 		d.Set("server_name_indications", serverNameIndications)
 	} else if (policy.ConfigurationStatus == "CREATE_STAGED" || policy.ConfigurationStatus == "UPDATE_STAGED") && policy.Staged.ServerNameIndications != nil {
 		serverNameIndications := make([]map[string]interface{}, len(policy.Staged.ServerNameIndications))
@@ -274,6 +275,7 @@ func resourceMLBPolicyV1Read(d *schema.ResourceData, meta interface{}) error {
 				"certificate_id": serverNameIndication.CertificateID,
 			}
 		}
+
 		d.Set("server_name_indications", serverNameIndications)
 	} else {
 		serverNameIndications := make([]interface{}, 0)

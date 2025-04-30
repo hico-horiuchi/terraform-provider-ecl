@@ -361,6 +361,7 @@ func TestMockedAccMLBV1LoadBalancerDataSource(t *testing.T) {
 					resource.TestCheckResourceAttr("data.ecl_mlb_load_balancer_v1.load_balancer_1", "plan_id", "00713021-9aea-41da-9a88-87760c08fa72"),
 					resource.TestCheckResourceAttr("data.ecl_mlb_load_balancer_v1.load_balancer_1", "plan_name", "50M_HA_4IF"),
 					resource.TestCheckResourceAttr("data.ecl_mlb_load_balancer_v1.load_balancer_1", "tenant_id", "34f5c98ef430457ba81292637d0c6fd0"),
+					resource.TestCheckResourceAttr("data.ecl_mlb_load_balancer_v1.load_balancer_1", "syslog_servers.#", "1"),
 					resource.TestCheckResourceAttr("data.ecl_mlb_load_balancer_v1.load_balancer_1", "syslog_servers.0.ip_address", "192.168.0.6"),
 					resource.TestCheckResourceAttr("data.ecl_mlb_load_balancer_v1.load_balancer_1", "syslog_servers.0.port", "514"),
 					resource.TestCheckResourceAttr("data.ecl_mlb_load_balancer_v1.load_balancer_1", "syslog_servers.0.protocol", "udp"),

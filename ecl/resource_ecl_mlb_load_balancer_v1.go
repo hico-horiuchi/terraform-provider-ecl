@@ -391,16 +391,16 @@ func resourceMLBLoadBalancerV1UpdateConfigurations(d *schema.ResourceData, clien
 			isConfigurationsUpdated = true
 
 			for i, interfaceV := range d.Get("interfaces").([]interface{}) {
-				reservedFixedIPs[i] = []load_balancers.CreateStagedOptsReservedFixedIP{}
+				results := []load_balancers.CreateStagedOptsReservedFixedIP{}
 				if reservedFixedIPsRaw, ok := interfaceV.(map[string]interface{})["reserved_fixed_ips"].([]interface{}); ok {
-					results := make([]load_balancers.CreateStagedOptsReservedFixedIP, len(reservedFixedIPsRaw))
+					results = make([]load_balancers.CreateStagedOptsReservedFixedIP, len(reservedFixedIPsRaw))
 					for j, reservedFixedIP := range reservedFixedIPsRaw {
 						results[j] = load_balancers.CreateStagedOptsReservedFixedIP{
 							IPAddress: reservedFixedIP.(map[string]interface{})["ip_address"].(string),
 						}
 					}
-					reservedFixedIPs[i] = results
 				}
+				reservedFixedIPs[i] = results
 			}
 
 			for i, interfaceV := range d.Get("interfaces").([]interface{}) {

@@ -50,7 +50,7 @@ func TestMockedAccMLBV1LoadBalancerResource(t *testing.T) {
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "syslog_servers.0.ip_address", "192.168.0.6"),
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "syslog_servers.0.port", "514"),
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "syslog_servers.0.protocol", "udp"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.#", "3"),
+					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.#", "1"),
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.0.network_id", "d6797cf4-42b9-4cad-8591-9dd91c3f0fc3"),
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.0.virtual_ip_address", "192.168.0.1"),
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.0.reserved_fixed_ips.#", "4"),
@@ -58,20 +58,6 @@ func TestMockedAccMLBV1LoadBalancerResource(t *testing.T) {
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.0.reserved_fixed_ips.1.ip_address", "192.168.0.3"),
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.0.reserved_fixed_ips.2.ip_address", "192.168.0.4"),
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.0.reserved_fixed_ips.3.ip_address", "192.168.0.5"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.network_id", "4f1d577d-e16c-47b4-b1f3-409ec9b118e0"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.virtual_ip_address", "192.168.10.1"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.reserved_fixed_ips.#", "4"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.reserved_fixed_ips.0.ip_address", "192.168.10.2"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.reserved_fixed_ips.1.ip_address", "192.168.10.3"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.reserved_fixed_ips.2.ip_address", "192.168.10.4"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.reserved_fixed_ips.3.ip_address", "192.168.10.5"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.2.network_id", "234ba0ad-ee26-4dbe-8e05-fc582c52e5fa"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.2.virtual_ip_address", "192.168.20.1"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.2.reserved_fixed_ips.#", "4"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.2.reserved_fixed_ips.0.ip_address", "192.168.20.2"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.2.reserved_fixed_ips.1.ip_address", "192.168.20.3"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.2.reserved_fixed_ips.2.ip_address", "192.168.20.4"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.2.reserved_fixed_ips.3.ip_address", "192.168.20.5"),
 				),
 			},
 			{
@@ -90,7 +76,7 @@ func TestMockedAccMLBV1LoadBalancerResource(t *testing.T) {
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "syslog_servers.1.ip_address", "192.168.1.6"),
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "syslog_servers.1.port", "514"),
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "syslog_servers.1.protocol", "udp"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.#", "4"),
+					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.#", "2"),
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.0.network_id", "d6797cf4-42b9-4cad-8591-9dd91c3f0fc3"),
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.0.virtual_ip_address", "192.168.0.1"),
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.0.reserved_fixed_ips.#", "4"),
@@ -98,27 +84,13 @@ func TestMockedAccMLBV1LoadBalancerResource(t *testing.T) {
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.0.reserved_fixed_ips.1.ip_address", "192.168.0.3"),
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.0.reserved_fixed_ips.2.ip_address", "192.168.0.4"),
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.0.reserved_fixed_ips.3.ip_address", "192.168.0.5"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.network_id", "4f1d577d-e16c-47b4-b1f3-409ec9b118e0"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.virtual_ip_address", "192.168.10.1"),
+					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.network_id", "58e6d72b-f5e7-4b83-b306-06989ff78a84"),
+					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.virtual_ip_address", "192.168.1.1"),
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.reserved_fixed_ips.#", "4"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.reserved_fixed_ips.0.ip_address", "192.168.10.2"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.reserved_fixed_ips.1.ip_address", "192.168.10.3"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.reserved_fixed_ips.2.ip_address", "192.168.10.4"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.reserved_fixed_ips.3.ip_address", "192.168.10.5"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.2.network_id", "234ba0ad-ee26-4dbe-8e05-fc582c52e5fa"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.2.virtual_ip_address", "192.168.20.1"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.2.reserved_fixed_ips.#", "4"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.2.reserved_fixed_ips.0.ip_address", "192.168.20.2"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.2.reserved_fixed_ips.1.ip_address", "192.168.20.3"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.2.reserved_fixed_ips.2.ip_address", "192.168.20.4"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.2.reserved_fixed_ips.3.ip_address", "192.168.20.5"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.3.network_id", "58e6d72b-f5e7-4b83-b306-06989ff78a84"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.3.virtual_ip_address", "192.168.1.1"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.3.reserved_fixed_ips.#", "4"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.3.reserved_fixed_ips.0.ip_address", "192.168.1.2"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.3.reserved_fixed_ips.1.ip_address", "192.168.1.3"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.3.reserved_fixed_ips.2.ip_address", "192.168.1.4"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.3.reserved_fixed_ips.3.ip_address", "192.168.1.5"),
+					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.reserved_fixed_ips.0.ip_address", "192.168.1.2"),
+					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.reserved_fixed_ips.1.ip_address", "192.168.1.3"),
+					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.reserved_fixed_ips.2.ip_address", "192.168.1.4"),
+					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.reserved_fixed_ips.3.ip_address", "192.168.1.5"),
 				),
 			},
 			{
@@ -134,7 +106,7 @@ func TestMockedAccMLBV1LoadBalancerResource(t *testing.T) {
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "syslog_servers.0.ip_address", "192.168.1.6"),
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "syslog_servers.0.port", "514"),
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "syslog_servers.0.protocol", "udp"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.#", "3"),
+					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.#", "1"),
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.0.network_id", "58e6d72b-f5e7-4b83-b306-06989ff78a84"),
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.0.virtual_ip_address", "192.168.1.1"),
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.0.reserved_fixed_ips.#", "4"),
@@ -142,20 +114,6 @@ func TestMockedAccMLBV1LoadBalancerResource(t *testing.T) {
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.0.reserved_fixed_ips.1.ip_address", "192.168.1.3"),
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.0.reserved_fixed_ips.2.ip_address", "192.168.1.4"),
 					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.0.reserved_fixed_ips.3.ip_address", "192.168.1.5"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.network_id", "4f1d577d-e16c-47b4-b1f3-409ec9b118e0"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.virtual_ip_address", "192.168.10.1"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.reserved_fixed_ips.#", "4"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.reserved_fixed_ips.0.ip_address", "192.168.10.2"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.reserved_fixed_ips.1.ip_address", "192.168.10.3"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.reserved_fixed_ips.2.ip_address", "192.168.10.4"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.1.reserved_fixed_ips.3.ip_address", "192.168.10.5"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.2.network_id", "234ba0ad-ee26-4dbe-8e05-fc582c52e5fa"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.2.virtual_ip_address", "192.168.20.1"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.2.reserved_fixed_ips.#", "4"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.2.reserved_fixed_ips.0.ip_address", "192.168.20.2"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.2.reserved_fixed_ips.1.ip_address", "192.168.20.3"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.2.reserved_fixed_ips.2.ip_address", "192.168.20.4"),
-					resource.TestCheckResourceAttr("ecl_mlb_load_balancer_v1.load_balancer", "interfaces.2.reserved_fixed_ips.3.ip_address", "192.168.20.5"),
 				),
 			},
 		},
@@ -189,17 +147,6 @@ resource "ecl_mlb_load_balancer_v1" "load_balancer" {
     }
     reserved_fixed_ips {
       ip_address = "192.168.0.5"
-    }
-  }
-  interfaces {
-    network_id = "4f1d577d-e16c-47b4-b1f3-409ec9b118e0"
-    virtual_ip_address = "192.168.10.1"
-  }
-  interfaces {
-    network_id = "234ba0ad-ee26-4dbe-8e05-fc582c52e5fa"
-    virtual_ip_address = "192.168.20.1"
-    reserved_fixed_ips {
-        ip_address = "192.168.20.2"
     }
   }
 }
@@ -237,17 +184,6 @@ resource "ecl_mlb_load_balancer_v1" "load_balancer" {
     }
     reserved_fixed_ips {
       ip_address = "192.168.0.5"
-    }
-  }
-  interfaces {
-    network_id = "4f1d577d-e16c-47b4-b1f3-409ec9b118e0"
-    virtual_ip_address = "192.168.10.1"
-  }
-  interfaces {
-    network_id = "234ba0ad-ee26-4dbe-8e05-fc582c52e5fa"
-    virtual_ip_address = "192.168.20.1"
-    reserved_fixed_ips {
-        ip_address = "192.168.20.2"
     }
   }
   interfaces {
@@ -298,17 +234,6 @@ resource "ecl_mlb_load_balancer_v1" "load_balancer" {
       ip_address = "192.168.1.5"
     }
   }
-  interfaces {
-    network_id = "4f1d577d-e16c-47b4-b1f3-409ec9b118e0"
-    virtual_ip_address = "192.168.10.1"
-  }
-  interfaces {
-    network_id = "234ba0ad-ee26-4dbe-8e05-fc582c52e5fa"
-    virtual_ip_address = "192.168.20.1"
-    reserved_fixed_ips {
-        ip_address = "192.168.20.2"
-    }
-  }
 }
 `)
 
@@ -316,7 +241,7 @@ var testMockMLBV1LoadBalancersCreate = fmt.Sprintf(`
 request:
   method: POST
   body: >
-    {"load_balancer":{"description":"description","interfaces":[{"network_id":"d6797cf4-42b9-4cad-8591-9dd91c3f0fc3","reserved_fixed_ips":[{"ip_address":"192.168.0.2"},{"ip_address":"192.168.0.3"},{"ip_address":"192.168.0.4"},{"ip_address":"192.168.0.5"}],"virtual_ip_address":"192.168.0.1"},{"network_id":"4f1d577d-e16c-47b4-b1f3-409ec9b118e0","reserved_fixed_ips":[],"virtual_ip_address":"192.168.10.1"},{"network_id":"234ba0ad-ee26-4dbe-8e05-fc582c52e5fa","reserved_fixed_ips":[{"ip_address":"192.168.20.2"}],"virtual_ip_address":"192.168.20.1"}],"name":"load_balancer","plan_id":"00713021-9aea-41da-9a88-87760c08fa72","syslog_servers":[{"ip_address":"192.168.0.6","port":514,"protocol":"udp"}],"tags":{"key":"value"}}}
+    {"load_balancer":{"description":"description","interfaces":[{"network_id":"d6797cf4-42b9-4cad-8591-9dd91c3f0fc3","reserved_fixed_ips":[{"ip_address":"192.168.0.2"},{"ip_address":"192.168.0.3"},{"ip_address":"192.168.0.4"},{"ip_address":"192.168.0.5"}],"virtual_ip_address":"192.168.0.1"}],"name":"load_balancer","plan_id":"00713021-9aea-41da-9a88-87760c08fa72","syslog_servers":[{"ip_address":"192.168.0.6","port":514,"protocol":"udp"}],"tags":{"key":"value"}}}
 response:
   code: 200
   body: >
@@ -399,42 +324,6 @@ response:
                 },
                 {
                   "ip_address": "192.168.0.5"
-                }
-              ]
-            },
-            {
-              "network_id": "4f1d577d-e16c-47b4-b1f3-409ec9b118e0",
-              "virtual_ip_address": "192.168.10.1",
-              "reserved_fixed_ips": [
-                {
-                  "ip_address": "192.168.10.2"
-                },
-                {
-                  "ip_address": "192.168.10.3"
-                },
-                {
-                  "ip_address": "192.168.10.4"
-                },
-                {
-                  "ip_address": "192.168.10.5"
-                }
-              ]
-            },
-            {
-              "network_id": "234ba0ad-ee26-4dbe-8e05-fc582c52e5fa",
-              "virtual_ip_address": "192.168.20.1",
-              "reserved_fixed_ips": [
-                {
-                  "ip_address": "192.168.20.2"
-                },
-                {
-                  "ip_address": "192.168.20.3"
-                },
-                {
-                  "ip_address": "192.168.20.4"
-                },
-                {
-                  "ip_address": "192.168.20.5"
                 }
               ]
             }
@@ -541,42 +430,6 @@ response:
               ]
             },
             {
-              "network_id": "4f1d577d-e16c-47b4-b1f3-409ec9b118e0",
-              "virtual_ip_address": "192.168.10.1",
-              "reserved_fixed_ips": [
-                {
-                  "ip_address": "192.168.10.2"
-                },
-                {
-                  "ip_address": "192.168.10.3"
-                },
-                {
-                  "ip_address": "192.168.10.4"
-                },
-                {
-                  "ip_address": "192.168.10.5"
-                }
-              ]
-            },
-            {
-              "network_id": "234ba0ad-ee26-4dbe-8e05-fc582c52e5fa",
-              "virtual_ip_address": "192.168.20.1",
-              "reserved_fixed_ips": [
-                {
-                  "ip_address": "192.168.20.2"
-                },
-                {
-                  "ip_address": "192.168.20.3"
-                },
-                {
-                  "ip_address": "192.168.20.4"
-                },
-                {
-                  "ip_address": "192.168.20.5"
-                }
-              ]
-            },
-            {
               "network_id": "58e6d72b-f5e7-4b83-b306-06989ff78a84",
               "virtual_ip_address": "192.168.1.1",
               "reserved_fixed_ips": [
@@ -662,42 +515,6 @@ response:
             ]
           },
           {
-            "network_id": "4f1d577d-e16c-47b4-b1f3-409ec9b118e0",
-            "virtual_ip_address": "192.168.10.1",
-            "reserved_fixed_ips": [
-              {
-                "ip_address": "192.168.10.2"
-              },
-              {
-                "ip_address": "192.168.10.3"
-              },
-              {
-                "ip_address": "192.168.10.4"
-              },
-              {
-                "ip_address": "192.168.10.5"
-              }
-            ]
-          },
-          {
-            "network_id": "234ba0ad-ee26-4dbe-8e05-fc582c52e5fa",
-            "virtual_ip_address": "192.168.20.1",
-            "reserved_fixed_ips": [
-              {
-                "ip_address": "192.168.20.2"
-              },
-              {
-                "ip_address": "192.168.20.3"
-              },
-              {
-                "ip_address": "192.168.20.4"
-              },
-              {
-                "ip_address": "192.168.20.5"
-              }
-            ]
-          },
-          {
             "network_id": "58e6d72b-f5e7-4b83-b306-06989ff78a84",
             "virtual_ip_address": "192.168.1.1",
             "reserved_fixed_ips": [
@@ -745,42 +562,6 @@ response:
                 },
                 {
                   "ip_address": "192.168.0.5"
-                }
-              ]
-            },
-            {
-              "network_id": "4f1d577d-e16c-47b4-b1f3-409ec9b118e0",
-              "virtual_ip_address": "192.168.10.1",
-              "reserved_fixed_ips": [
-                {
-                  "ip_address": "192.168.10.2"
-                },
-                {
-                  "ip_address": "192.168.10.3"
-                },
-                {
-                  "ip_address": "192.168.10.4"
-                },
-                {
-                  "ip_address": "192.168.10.5"
-                }
-              ]
-            },
-            {
-              "network_id": "234ba0ad-ee26-4dbe-8e05-fc582c52e5fa",
-              "virtual_ip_address": "192.168.20.1",
-              "reserved_fixed_ips": [
-                {
-                  "ip_address": "192.168.20.2"
-                },
-                {
-                  "ip_address": "192.168.20.3"
-                },
-                {
-                  "ip_address": "192.168.20.4"
-                },
-                {
-                  "ip_address": "192.168.20.5"
                 }
               ]
             },
@@ -863,42 +644,6 @@ response:
               },
               {
                 "ip_address": "192.168.0.5"
-              }
-            ]
-          },
-          {
-            "network_id": "4f1d577d-e16c-47b4-b1f3-409ec9b118e0",
-            "virtual_ip_address": "192.168.10.1",
-            "reserved_fixed_ips": [
-              {
-                "ip_address": "192.168.10.2"
-              },
-              {
-                "ip_address": "192.168.10.3"
-              },
-              {
-                "ip_address": "192.168.10.4"
-              },
-              {
-                "ip_address": "192.168.10.5"
-              }
-            ]
-          },
-          {
-            "network_id": "234ba0ad-ee26-4dbe-8e05-fc582c52e5fa",
-            "virtual_ip_address": "192.168.20.1",
-            "reserved_fixed_ips": [
-              {
-                "ip_address": "192.168.20.2"
-              },
-              {
-                "ip_address": "192.168.20.3"
-              },
-              {
-                "ip_address": "192.168.20.4"
-              },
-              {
-                "ip_address": "192.168.20.5"
               }
             ]
           },
@@ -986,42 +731,6 @@ response:
             ]
           },
           {
-            "network_id": "4f1d577d-e16c-47b4-b1f3-409ec9b118e0",
-            "virtual_ip_address": "192.168.10.1",
-            "reserved_fixed_ips": [
-              {
-                "ip_address": "192.168.10.2"
-              },
-              {
-                "ip_address": "192.168.10.3"
-              },
-              {
-                "ip_address": "192.168.10.4"
-              },
-              {
-                "ip_address": "192.168.10.5"
-              }
-            ]
-          },
-          {
-            "network_id": "234ba0ad-ee26-4dbe-8e05-fc582c52e5fa",
-            "virtual_ip_address": "192.168.20.1",
-            "reserved_fixed_ips": [
-              {
-                "ip_address": "192.168.20.2"
-              },
-              {
-                "ip_address": "192.168.20.3"
-              },
-              {
-                "ip_address": "192.168.20.4"
-              },
-              {
-                "ip_address": "192.168.20.5"
-              }
-            ]
-          },
-          {
             "network_id": "58e6d72b-f5e7-4b83-b306-06989ff78a84",
             "virtual_ip_address": "192.168.1.1",
             "reserved_fixed_ips": [
@@ -1073,42 +782,6 @@ response:
               ]
             },
             {
-              "network_id": "4f1d577d-e16c-47b4-b1f3-409ec9b118e0",
-              "virtual_ip_address": "192.168.10.1",
-              "reserved_fixed_ips": [
-                {
-                  "ip_address": "192.168.10.2"
-                },
-                {
-                  "ip_address": "192.168.10.3"
-                },
-                {
-                  "ip_address": "192.168.10.4"
-                },
-                {
-                  "ip_address": "192.168.10.5"
-                }
-              ]
-            },
-            {
-              "network_id": "234ba0ad-ee26-4dbe-8e05-fc582c52e5fa",
-              "virtual_ip_address": "192.168.20.1",
-              "reserved_fixed_ips": [
-                {
-                  "ip_address": "192.168.20.2"
-                },
-                {
-                  "ip_address": "192.168.20.3"
-                },
-                {
-                  "ip_address": "192.168.20.4"
-                },
-                {
-                  "ip_address": "192.168.20.5"
-                }
-              ]
-            },
-            {
               "network_id": "58e6d72b-f5e7-4b83-b306-06989ff78a84",
               "virtual_ip_address": "192.168.1.1",
               "reserved_fixed_ips": [
@@ -1152,42 +825,6 @@ response:
                 },
                 {
                   "ip_address": "192.168.1.5"
-                }
-              ]
-            },
-            {
-              "network_id": "4f1d577d-e16c-47b4-b1f3-409ec9b118e0",
-              "virtual_ip_address": "192.168.10.1",
-              "reserved_fixed_ips": [
-                {
-                  "ip_address": "192.168.10.2"
-                },
-                {
-                  "ip_address": "192.168.10.3"
-                },
-                {
-                  "ip_address": "192.168.10.4"
-                },
-                {
-                  "ip_address": "192.168.10.5"
-                }
-              ]
-            },
-            {
-              "network_id": "234ba0ad-ee26-4dbe-8e05-fc582c52e5fa",
-              "virtual_ip_address": "192.168.20.1",
-              "reserved_fixed_ips": [
-                {
-                  "ip_address": "192.168.20.2"
-                },
-                {
-                  "ip_address": "192.168.20.3"
-                },
-                {
-                  "ip_address": "192.168.20.4"
-                },
-                {
-                  "ip_address": "192.168.20.5"
                 }
               ]
             }
@@ -1251,42 +888,6 @@ response:
               },
               {
                 "ip_address": "192.168.0.5"
-              }
-            ]
-          },
-          {
-            "network_id": "4f1d577d-e16c-47b4-b1f3-409ec9b118e0",
-            "virtual_ip_address": "192.168.10.1",
-            "reserved_fixed_ips": [
-              {
-                "ip_address": "192.168.10.2"
-              },
-              {
-                "ip_address": "192.168.10.3"
-              },
-              {
-                "ip_address": "192.168.10.4"
-              },
-              {
-                "ip_address": "192.168.10.5"
-              }
-            ]
-          },
-          {
-            "network_id": "234ba0ad-ee26-4dbe-8e05-fc582c52e5fa",
-            "virtual_ip_address": "192.168.20.1",
-            "reserved_fixed_ips": [
-              {
-                "ip_address": "192.168.20.2"
-              },
-              {
-                "ip_address": "192.168.20.3"
-              },
-              {
-                "ip_address": "192.168.20.4"
-              },
-              {
-                "ip_address": "192.168.20.5"
               }
             ]
           },
@@ -1367,7 +968,7 @@ var testMockMLBV1LoadBalancersCreateConfigurations = fmt.Sprintf(`
 request:
   method: POST
   body: >
-    {"load_balancer":{"interfaces":[{"network_id":"58e6d72b-f5e7-4b83-b306-06989ff78a84","reserved_fixed_ips":[{"ip_address":"192.168.1.2"},{"ip_address":"192.168.1.3"},{"ip_address":"192.168.1.4"},{"ip_address":"192.168.1.5"}],"virtual_ip_address":"192.168.1.1"},{"network_id":"4f1d577d-e16c-47b4-b1f3-409ec9b118e0","reserved_fixed_ips":[{"ip_address":"192.168.10.2"},{"ip_address":"192.168.10.3"},{"ip_address":"192.168.10.4"},{"ip_address":"192.168.10.5"}],"virtual_ip_address":"192.168.10.1"},{"network_id":"234ba0ad-ee26-4dbe-8e05-fc582c52e5fa","reserved_fixed_ips":[{"ip_address":"192.168.20.2"},{"ip_address":"192.168.20.3"},{"ip_address":"192.168.20.4"},{"ip_address":"192.168.20.5"}],"virtual_ip_address":"192.168.20.1"}],"syslog_servers":[{"ip_address":"192.168.1.6","port":514,"protocol":"udp"}]}}
+    {"load_balancer":{"interfaces":[{"network_id":"58e6d72b-f5e7-4b83-b306-06989ff78a84","reserved_fixed_ips":[{"ip_address":"192.168.1.2"},{"ip_address":"192.168.1.3"},{"ip_address":"192.168.1.4"},{"ip_address":"192.168.1.5"}],"virtual_ip_address":"192.168.1.1"}],"syslog_servers":[{"ip_address":"192.168.1.6","port":514,"protocol":"udp"}]}}
 response:
   code: 200
   body: >
@@ -1398,42 +999,6 @@ response:
                 "ip_address": "192.168.1.5"
               }
             ]
-          },
-          {
-            "network_id": "4f1d577d-e16c-47b4-b1f3-409ec9b118e0",
-            "virtual_ip_address": "192.168.10.1",
-            "reserved_fixed_ips": [
-              {
-                "ip_address": "192.168.10.2"
-              },
-              {
-                "ip_address": "192.168.10.3"
-              },
-              {
-                "ip_address": "192.168.10.4"
-              },
-              {
-                "ip_address": "192.168.10.5"
-              }
-            ]
-          },
-          {
-            "network_id": "234ba0ad-ee26-4dbe-8e05-fc582c52e5fa",
-            "virtual_ip_address": "192.168.20.1",
-            "reserved_fixed_ips": [
-              {
-                "ip_address": "192.168.20.2"
-              },
-              {
-                "ip_address": "192.168.20.3"
-              },
-              {
-                "ip_address": "192.168.20.4"
-              },
-              {
-                "ip_address": "192.168.20.5"
-              }
-            ]
           }
         ]
       }
@@ -1447,7 +1012,7 @@ var testMockMLBV1LoadBalancersUpdateConfigurations = fmt.Sprintf(`
 request:
   method: PATCH
   body: >
-    {"load_balancer":{"interfaces":[{"network_id":"d6797cf4-42b9-4cad-8591-9dd91c3f0fc3","reserved_fixed_ips":[{"ip_address":"192.168.0.2"},{"ip_address":"192.168.0.3"},{"ip_address":"192.168.0.4"},{"ip_address":"192.168.0.5"}],"virtual_ip_address":"192.168.0.1"},{"network_id":"4f1d577d-e16c-47b4-b1f3-409ec9b118e0","reserved_fixed_ips":[{"ip_address":"192.168.10.2"},{"ip_address":"192.168.10.3"},{"ip_address":"192.168.10.4"},{"ip_address":"192.168.10.5"}],"virtual_ip_address":"192.168.10.1"},{"network_id":"234ba0ad-ee26-4dbe-8e05-fc582c52e5fa","reserved_fixed_ips":[{"ip_address":"192.168.20.2"},{"ip_address":"192.168.20.3"},{"ip_address":"192.168.20.4"},{"ip_address":"192.168.20.5"}],"virtual_ip_address":"192.168.20.1"},{"network_id":"58e6d72b-f5e7-4b83-b306-06989ff78a84","reserved_fixed_ips":[{"ip_address":"192.168.1.2"},{"ip_address":"192.168.1.3"},{"ip_address":"192.168.1.4"},{"ip_address":"192.168.1.5"}],"virtual_ip_address":"192.168.1.1"}],"syslog_servers":[{"ip_address":"192.168.0.6","port":514,"protocol":"udp"},{"ip_address":"192.168.1.6","port":514,"protocol":"udp"}]}}
+    {"load_balancer":{"interfaces":[{"network_id":"d6797cf4-42b9-4cad-8591-9dd91c3f0fc3","reserved_fixed_ips":[{"ip_address":"192.168.0.2"},{"ip_address":"192.168.0.3"},{"ip_address":"192.168.0.4"},{"ip_address":"192.168.0.5"}],"virtual_ip_address":"192.168.0.1"},{"network_id":"58e6d72b-f5e7-4b83-b306-06989ff78a84","reserved_fixed_ips":[{"ip_address":"192.168.1.2"},{"ip_address":"192.168.1.3"},{"ip_address":"192.168.1.4"},{"ip_address":"192.168.1.5"}],"virtual_ip_address":"192.168.1.1"}],"syslog_servers":[{"ip_address":"192.168.0.6","port":514,"protocol":"udp"},{"ip_address":"192.168.1.6","port":514,"protocol":"udp"}]}}
 response:
   code: 200
   body: >
@@ -1481,42 +1046,6 @@ response:
               },
               {
                 "ip_address": "192.168.0.5"
-              }
-            ]
-          },
-          {
-            "network_id": "4f1d577d-e16c-47b4-b1f3-409ec9b118e0",
-            "virtual_ip_address": "192.168.10.1",
-            "reserved_fixed_ips": [
-              {
-                "ip_address": "192.168.10.2"
-              },
-              {
-                "ip_address": "192.168.10.3"
-              },
-              {
-                "ip_address": "192.168.10.4"
-              },
-              {
-                "ip_address": "192.168.10.5"
-              }
-            ]
-          },
-          {
-            "network_id": "234ba0ad-ee26-4dbe-8e05-fc582c52e5fa",
-            "virtual_ip_address": "192.168.20.1",
-            "reserved_fixed_ips": [
-              {
-                "ip_address": "192.168.20.2"
-              },
-              {
-                "ip_address": "192.168.20.3"
-              },
-              {
-                "ip_address": "192.168.20.4"
-              },
-              {
-                "ip_address": "192.168.20.5"
               }
             ]
           },
